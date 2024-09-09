@@ -5,7 +5,7 @@ namespace MyApp;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 
-require dirname(__DIR__) . "/darabase/ChatUser.php";
+
 class Chat implements MessageComponentInterface
 {
     protected $clients;
@@ -37,10 +37,10 @@ class Chat implements MessageComponentInterface
 
         $data = json_decode($msg, true);
         foreach ($this->clients as $client) {
-            if ($from !== $client) {
-                // The sender is not the receiver, send to each client connected
-                $client->send($msg);
-            }
+            // if ($from !== $client) {
+            //     // The sender is not the receiver, send to each client connected
+            // }
+            $client->send($msg);
         }
     }
 
