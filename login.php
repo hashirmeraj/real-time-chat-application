@@ -94,7 +94,14 @@
     </div>
 
     <!-- Php For joining chat room -->
-
+    <?php
+    if (isset($_POST['join'])) {
+        require './database/users.php';
+        $objUser = new Users;
+        $objUser->setEmail($_POST['email']);
+        $objUser->setName($_POST['name']);
+    }
+    ?>
 </body>
 
 </html>
