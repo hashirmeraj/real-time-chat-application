@@ -63,7 +63,7 @@
                 <div class="display-chat w-full  h-full flex flex-col ">
 
                     <!-- message -->
-                    <div class="message-area flex w-full justify-end">
+                    <div class="message-area flex w-full justify-start">
                         <div class="users flex  w-2/5 mb-4 ">
                             <div class="users-img"> <img class=" w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
                             <div class="details flex justify-between w-full  ml-4 bg-gray-700 p-2 rounded-b-xl">
@@ -78,18 +78,22 @@
                         </div>
                     </div>
                     <!-- sending message -->
-                    <div class="users flex  w-2/5 mb-4">
-                        <div class="users-img"> <img class=" w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
-                        <div class="details flex justify-between w-full  ml-4 bg-gray-700 p-2 rounded-b-xl">
-                            <div class="username   text-white">
-                                <span class="block font-bold">Hashir Meraj</span>
+                    <div class="message-area flex w-full justify-end">
+                        <div class="users flex  w-2/5 mb-4 ">
+                            <div class="users-img"> <img class=" w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
+                            <div class="details flex justify-between w-full  ml-4 bg-gray-700 p-2 rounded-b-xl">
+                                <div class="username   text-white">
+                                    <span class="block font-bold">Hashir Meraj</span>
 
-                                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque quos atque officia ad necessitatibus. Excepturi ex natus quasi vel officiis.</span>
+                                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque quos atque officia ad necessitatibus. Excepturi ex natus quasi vel officiis.</span>
+                                </div>
+                                <div class="time">5:30</div>
                             </div>
-                            <div class="time">5:30</div>
-                        </div>
 
+                        </div>
                     </div>
+                    <!-- sending end -->
+
                 </div>
             </div>
         </div>
