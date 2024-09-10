@@ -100,6 +100,11 @@
         $objUser = new Users;
         $objUser->setEmail($_POST['email']);
         $objUser->setName($_POST['name']);
+        $objUser->setLoginStatus(1);
+        $objUser->setLastLogin(date('Y-m-d h:i:s'));
+        if ($objUser->save()) {
+            echo 'save';
+        }
     }
     ?>
 </body>
