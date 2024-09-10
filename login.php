@@ -114,10 +114,10 @@
             }
             echo "User found: " . $userData['name'];
         } else {
+            if ($objUser->save()) {
+                echo '<br /> save';
+            }
             echo "No user found with the provided email.";
-        }
-        if ($objUser->save()) {
-            echo '<br /> save';
         }
     }
     ?>
