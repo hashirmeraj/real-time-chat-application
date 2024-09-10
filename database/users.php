@@ -7,6 +7,7 @@ class Users
     private $email;
     private $loginStatus;
     private $lastLogin;
+    private $dbConn;
 
     // Getter for $id
     public function getId()
@@ -72,5 +73,25 @@ class Users
     {
         require_once './config.php';
         $db = new DbConnect();
+        $this->dbConn = $db->connect();
+    }
+    public function save()
+    {
+        $sql = "INSERT INTO `users`(`name`, `email`, `login_status`, `last_login`) VALUES
+         (':name',':email',':loginStatus',':lastLogin')";
+        $stmt = $this->dbConn->prepare($sql);
+        $stmt->bind_param(":name", $this->name);
+        $stmt->bind_param(":email", $this->email);
+        $stmt->bind_param(":loginStatus", $this->loginStatus);
+        $stmt->bind_param(":lastLogin", $this->lastLogin);
+        try {
+            if ($stmt->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
 }
