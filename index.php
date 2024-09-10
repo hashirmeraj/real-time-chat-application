@@ -8,20 +8,69 @@
 </head>
 
 <body>
-    <div class="main flex justify-end items-center w-full h-screen ">
+    <div class="main flex w-screen h-screen bg-slate-500 justify-between">
+        <aside class="left h-screen w-1/4 text-white">
+            <div class="h-full w-full  bg-gray-900 rounded-r-2xl flex flex-col items-center pt-10 ">
+                <div class="heading">
+                    <h1>Chat</h1>
+                </div>
+                <div class="flex flex-col w-4/5 p-1 ">
+                    <div class="users flex mt-2">
+                        <div class="users-img"> <img class=" w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
+                        <div class="details flex justify-between w-full  ml-4">
+                            <div class="username font-semibold ">
+                                <span class="block font-bold">Hashir Meraj</span>
 
-        <div class="chatbox w-[50%] h-[50vh] bg-slate-400 mr-64">
-            <div id="message_area" class="chat-area h-[40vh] w-full bg-slate-400">
-                <div class="sender h-auto w-40 bg-blue-500  mb-2 flex justify-between"> <span> Message</span><span> Id</span></div>
+                                <span>This is text</span>
+                            </div>
+                            <div class="time">5:30</div>
+                        </div>
+
+                    </div>
+
+                    <!-- example -->
+
+                    <div class="users flex mt-4">
+                        <div class="users-img"> <img class=" w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
+                        <div class="details flex justify-between w-full  ml-4">
+                            <div class="username font-semibold ">
+                                <span class="block font-bold">Hashir Meraj</span>
+
+                                <span>This is text</span>
+                            </div>
+                            <div class="time">5:30</div>
+                        </div>
+
+                    </div>
+                    <div class="users flex">
+                        <div class="users-img"> <img class=" w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
+                        <div class="details flex justify-between w-full  ml-4">
+                            <div class="username font-semibold ">
+                                <span class="block font-bold">Hashir Meraj</span>
+
+                                <span>This is text</span>
+                            </div>
+                            <div class="time">5:30</div>
+                        </div>
+
+                    </div>
+                    <div class="users flex">
+                        <div class="users-img"> <img class=" w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
+                        <div class="details flex justify-between w-full  ml-4">
+                            <div class="username font-semibold ">
+                                <span class="block font-bold">Hashir Meraj</span>
+
+                                <span>This is text</span>
+                            </div>
+                            <div class="time">5:30</div>
+                        </div>
+
+                    </div>
+                    <!-- Example End -->
+                </div>
             </div>
-            <div class="form-controll border-2 border-solid border-green-600">
-                <form action="" method="post" id="chat_form">
-                    <input type="hidden" id="userId" value="109">
-                    <textarea id="chat_message" placeholder="Text.." class="w-full"></textarea>
-                    <button type="submit" id="send" class="p-2 bg-slate-500 rounded-lg">Submit</button>
-                </form>
-            </div>
-        </div>
+        </aside>
+        <div class="right w-[73%] h-screen bg-slate-900 rounded-l-2xl"> </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./src/script.js"></script>

@@ -1,5 +1,39 @@
 <?php
 session_start();
+
+
+if (isset($_POST['join'])) {
+    require './database/users.php';
+    $objUser = new Users;
+    $objUser->setEmail($_POST['email']);
+    $objUser->setName($_POST['name']);
+    $objUser->setLoginStatus(1);
+    $objUser->setLastLogin(date('Y-m-d h:i:s'));
+
+    $email = $objUser->getEmail();
+    $userData = $objUser->getUserByEmail($email);
+
+    if ($userData) {
+
+        $objUser->setId($userData['id']);
+        if ($objUser->updateLoginStatus()) {
+            $_SESSION['userId'] = $userData['id'];
+            $_SESSION['loggedIn'] = true;
+            header("Location:./index.php?login=wb");
+            exit();
+            echo 'Wellcome Back: ';
+        }
+    } else {
+        if ($objUser->save()) {
+            $userData = $objUser->getUserByEmail($email);
+            $_SESSION['userId'] = $userData['id'];
+            $_SESSION['loggedIn'] = true;
+            header("Location:./index.php?login=w");
+            exit();
+            echo 'Welcome';
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +41,8 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="./src/output.css">
+    <title>Login | Chat Room</title>
 
 </head>
 
@@ -99,32 +134,6 @@ session_start();
     <!-- Php For joining chat room -->
     <?php
 
-    if (isset($_POST['join'])) {
-        require './database/users.php';
-        $objUser = new Users;
-        $objUser->setEmail($_POST['email']);
-        $objUser->setName($_POST['name']);
-        $objUser->setLoginStatus(1);
-        $objUser->setLastLogin(date('Y-m-d h:i:s'));
-
-        $email = $objUser->getEmail();
-        $userData = $objUser->getUserByEmail($email);
-
-        if ($userData) {
-
-            $objUser->setId($userData['id']);
-            if ($objUser->updateLoginStatus()) {
-                echo 'Wellcome Back: ';
-            }
-        } else {
-            if ($objUser->save()) {
-                $userData = $objUser->getUserByEmail($email);
-                echo 'Welcome';
-            }
-        }
-
-        $_SESSION['userId'] = $userData['id'];
-    }
     ?>
 </body>
 
