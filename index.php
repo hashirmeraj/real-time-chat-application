@@ -97,10 +97,10 @@
                     <!-- sending end -->
 
 
-                    <div class="typing-area w-full border-2  border-green-200 fixed bottom-3">
+                    <div class="typing-area  fixed bottom-3 w-full justify-center">
                         <form action="" method="post">
-                            <div class="form-controll">
-                                <input type="text" placeholder="typing.." maxlength="1000" required>
+                            <div class="form-controll  ">
+                                <input class=" w-[50%]  " type="text" placeholder="typing.." maxlength="1000" required>
                                 <button type="button"><i class="fa-solid fa-paper-plane"></i></button>
                             </div>
                         </form>
