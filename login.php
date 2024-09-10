@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./src/output.css">
+
 </head>
 
 <body>
@@ -102,8 +102,22 @@
         $objUser->setName($_POST['name']);
         $objUser->setLoginStatus(1);
         $objUser->setLastLogin(date('Y-m-d h:i:s'));
+
+        $email = $objUser->getEmail();
+        $userData = $objUser->getUserByEmail($email);
+
+        if ($userData) {
+
+            $objUser->setId($userData['id']);
+            if ($objUser->updateLoginStatus()) {
+                echo 'status change';
+            }
+            echo "User found: " . $userData['name'];
+        } else {
+            echo "No user found with the provided email.";
+        }
         if ($objUser->save()) {
-            echo 'save';
+            echo '<br /> save';
         }
     }
     ?>
