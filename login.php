@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -95,6 +98,7 @@
 
     <!-- Php For joining chat room -->
     <?php
+
     if (isset($_POST['join'])) {
         require './database/users.php';
         $objUser = new Users;
@@ -110,15 +114,16 @@
 
             $objUser->setId($userData['id']);
             if ($objUser->updateLoginStatus()) {
-                echo 'status change';
+                echo 'Wellcome Back: ';
             }
-            echo "User found: " . $userData['name'];
         } else {
             if ($objUser->save()) {
-                echo '<br /> save';
+                $userData = $objUser->getUserByEmail($email);
+                echo 'Welcome';
             }
-            echo "No user found with the provided email.";
         }
+
+        $_SESSION['userId'] = $userData['id'];
     }
     ?>
 </body>
