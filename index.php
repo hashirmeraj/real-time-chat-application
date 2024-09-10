@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./src/output.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/b01bd35356.js" crossorigin="anonymous"></script>
+    <title>Chat Room</title>
 </head>
 
 <body>
@@ -58,7 +60,7 @@
                 </div>
             </div>
         </aside>
-        <div class="right w-[73%] h-screen bg-slate-900 rounded-l-2xl">
+        <div class="right w-[73%] h-full bg-slate-900 rounded-l-2xl">
             <div class="chatarea w-full h-full p-8" id="chatArea">
                 <div class="display-chat w-full  h-full flex flex-col ">
 
@@ -94,8 +96,20 @@
                     </div>
                     <!-- sending end -->
 
+
+                    <div class="typing-area w-full border-2  border-green-200 fixed bottom-3">
+                        <form action="" method="post">
+                            <div class="form-controll">
+                                <input type="text" placeholder="typing.." maxlength="1000" required>
+                                <button type="button"><i class="fa-solid fa-paper-plane"></i></button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
+
+            <!-- typing area -->
+
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
