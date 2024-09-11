@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
+
+.message-deatils {
+    @apply flex justify-between w-full ml-4 bg-gray-700 p-2 rounded-b-xl
+}
+
 @tailwind utilities;

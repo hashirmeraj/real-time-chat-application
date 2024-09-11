@@ -554,6 +554,18 @@ video {
   --tw-contain-style:  ;
 }
 
+.message-deatils {
+  margin-left: 1rem;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  border-bottom-right-radius: 0.75rem;
+  border-bottom-left-radius: 0.75rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+  padding: 0.5rem;
+}
+
 .pointer-events-none {
   pointer-events: none;
 }
