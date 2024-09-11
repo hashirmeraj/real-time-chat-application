@@ -25,7 +25,6 @@ class Chat implements MessageComponentInterface
 
         echo "New connection! ({$conn->resourceId})\n";
     }
-
     public function onMessage(ConnectionInterface $from, $msg)
     {
         $numRecv = count($this->clients) - 1;
@@ -61,10 +60,14 @@ class Chat implements MessageComponentInterface
 
         foreach ($this->clients as $client) {
             if ($from !== $client) {
-                $data['from'] = 'Me';
+                // For all other clients
+                $data['from'] = $user['name'] ?? 'Unknown'; // Sender's actual name for other clients
+            } else {
+                // For the sender
+                $data['from'] = 'Me'; // Sender's view shows "Me"
             }
+            $client->send(json_encode($data));
         }
-        $client->send(json_encode($data));
     }
 
 

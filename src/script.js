@@ -38,7 +38,7 @@ $(document).ready(function () {
             </div>
             <div class="details flex justify-between w-full ml-4 bg-gray-700 p-2 rounded-b-xl">
                 <div class="username text-white">
-                    <span class="block font-bold">`+ data.userId + `</span>
+                    <span class="block font-bold">`+ data.from + `</span>
                     <span>`+ data.msg + `</span>
                 </div>
                 <div class="time">5:30</div>
