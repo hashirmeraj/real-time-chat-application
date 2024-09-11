@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./src/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="./src/output.css">
     <script src="https://kit.fontawesome.com/b01bd35356.js" crossorigin="anonymous"></script>
     <title>Chat Room</title>
 </head>
@@ -61,7 +62,7 @@
             </div>
         </aside>
         <div class="right w-[73%] h-full bg-slate-900 rounded-l-2xl">
-            <div class="chatarea w-full h-full p-8" id="chatArea">
+            <div class="chatarea w-full  h-full p-8" id="chatArea">
                 <div class="display-chat w-full  h-full flex flex-col ">
 
                     <!-- message -->
@@ -94,17 +95,18 @@
 
                         </div>
                     </div>
-                    <!-- sending end -->
+
+                </div>
+                <!-- sending end -->
 
 
-                    <div class="typing-area  fixed bottom-3 w-full justify-center">
-                        <form action="" method="post">
-                            <div class="form-controll  ">
-                                <input class=" w-[50%]  " type="text" placeholder="typing.." maxlength="1000" required>
-                                <button type="button"><i class="fa-solid fa-paper-plane"></i></button>
-                            </div>
-                        </form>
-                    </div>
+                <div class="typing-area ">
+                    <form action="" method="post">
+                        <div class="form-controll  w-full flex justify-around ">
+                            <input class=" w-11/12 rounded-lg  p-1" type="text" placeholder="Type here..." maxlength="1000" required>
+                            <button type="submit" class=" h-10 w-10 rounded-full "><i class="fa-solid fa-paper-plane text-gray-400 text-2xl"></i></button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
