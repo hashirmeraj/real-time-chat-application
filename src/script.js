@@ -11,10 +11,11 @@ $(document).ready(function () {
     conn.onmessage = function (e) {
         console.log(e.data);
         // Uncomment if you want to display the received message
-        // var data = JSON.parse(e.data);
-        // var html_data = "<div class='sender h-auto w-40 bg-blue-500 mb-2 flex justify-between'> <span> " + data.msg + "</span><span> " + data.uId + "</span></div>";
-        // $('#message_area').append(html_data);
-        // $('#chat_message').val('');  // Clear the message input after sending
+        var data = JSON.parse(e.data);
+        
+        var html_data = "<div class='sender h-auto w-40 bg-blue-500 mb-2 flex justify-between'> <span> " + data.msg + "</span><span> " + data.uId + "</span></div>";
+        $('#message_area').append(html_data);
+        $('#chat_message').val('');  // Clear the message input after sending
     };
 
     // Function to send message through the established WebSocket connection
