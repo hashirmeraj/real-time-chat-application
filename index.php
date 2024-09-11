@@ -62,7 +62,7 @@
             </div>
         </aside>
         <div class="right w-[73%] h-full bg-slate-900 rounded-l-2xl">
-            <div class="chatarea w-full  h-full p-8" id="chatArea">
+            <div class="chatarea w-full h-max p-8" id="chatArea">
                 <div class="display-chat w-full  h-full flex flex-col ">
 
                     <!-- message -->
@@ -102,9 +102,9 @@
 
                 <div class="typing-area ">
                     <form action="" method="post">
-                        <div class="form-controll  w-full flex justify-around ">
-                            <input class=" w-11/12 rounded-lg  p-1" type="text" placeholder="Type here..." maxlength="1000" required>
-                            <button type="submit" class=" h-10 w-10 rounded-full "><i class="fa-solid fa-paper-plane text-gray-400 text-2xl"></i></button>
+                        <div class="form-controll  w-2/3 flex  justify-around  fixed bottom-5 ">
+                            <input class="  rounded-lg  p-1 w-11/12 focus:outline-none" type="text" placeholder="Type here..." maxlength="1000" required>
+                            <button type="submit" class=" h-10 w-10 rounded-full text-gray-400 focus:text-white "><i class="fa-solid fa-paper-plane  text-2xl"></i></button>
                         </div>
                     </form>
                 </div>
