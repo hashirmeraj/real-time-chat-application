@@ -12,7 +12,7 @@ $(document).ready(function () {
         console.log(e.data);
         // Uncomment if you want to display the received message
         var data = JSON.parse(e.data);
-        if (userId == data.userId) {
+        if (data.from == 'Me') {
             var html_data = `
             <div class="message-area flex w-full justify-end">
                 <div class="users flex w-2/5 mb-4">
@@ -21,7 +21,7 @@ $(document).ready(function () {
                     </div>
                     <div class="details flex justify-between w-full ml-4 bg-gray-700 p-2 rounded-b-xl">
                         <div class="username text-white">
-                            <span class="block font-bold">`+ data.userId + `</span>
+                            <span class="block font-bold">`+ data.from + `</span>
                             <span>`+ data.msg + `</span>
                         </div>
                         <div class="time">5:30</div>
