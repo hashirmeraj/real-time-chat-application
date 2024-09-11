@@ -12,10 +12,26 @@ $(document).ready(function () {
         console.log(e.data);
         // Uncomment if you want to display the received message
         var data = JSON.parse(e.data);
-
-        // var html_data = "<div class='sender h-auto w-40 bg-blue-500 mb-2 flex justify-between'> <span> " + data.msg + "</span><span> " + data.uId + "</span></div>";
-        var html_data = `
-    <div class="message-area flex w-full justify-end">
+        if (userId == data.userId) {
+            var html_data = `
+            <div class="message-area flex w-full justify-end">
+                <div class="users flex w-2/5 mb-4">
+                    <div class="users-img">
+                        <img class="w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="">
+                    </div>
+                    <div class="details flex justify-between w-full ml-4 bg-gray-700 p-2 rounded-b-xl">
+                        <div class="username text-white">
+                            <span class="block font-bold">`+ data.userId + `</span>
+                            <span>`+ data.msg + `</span>
+                        </div>
+                        <div class="time">5:30</div>
+                    </div>
+                </div>
+            </div>
+        `;
+        } else {
+            var html_data = `
+    <div class="message-area flex w-full justify-start">
         <div class="users flex w-2/5 mb-4">
             <div class="users-img">
                 <img class="w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="">
@@ -30,6 +46,7 @@ $(document).ready(function () {
         </div>
     </div>
 `;
+        }
 
         $('#chatArea').append(html_data);
         $('#chat_message').val('');  // Clear the message input after sending
@@ -39,10 +56,10 @@ $(document).ready(function () {
     $("#send").click(function (e) {
         e.preventDefault(); // Prevent any default action
         var userId = $("#userId").val();
-        var message = $("#message").val();
+        var msg = $("#message").val();
         var data = {
             userId: userId,
-            msg: message
+            msg: msg
         };
 
         // Ensure the WebSocket connection is still open before sending

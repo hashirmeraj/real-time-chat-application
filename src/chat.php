@@ -4,6 +4,9 @@ namespace MyApp;
 
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
+use Users;
+
+require __DIR__ . '/../database/users.php';
 
 
 class Chat implements MessageComponentInterface
@@ -34,15 +37,36 @@ class Chat implements MessageComponentInterface
             $numRecv == 1 ? '' : 's'
         );
 
-
         $data = json_decode($msg, true);
-        foreach ($this->clients as $client) {
-            // if ($from !== $client) {
-            //     // The sender is not the receiver, send to each client connected
-            // }
-            $client->send($msg);
+
+        // Check if userId is set
+        if (!isset($data['userId'])) {
+            echo "User ID is not set in message data.\n";
+            return;
         }
+
+        $objUser = new \Users();
+        $user = $objUser->getUserByid($data['userId']);
+
+        // Check if user is found
+        if ($user) {
+            $data['from'] = $user['name'] ?? 'Unknown'; // Use null coalescing operator to handle missing data
+            $data['msg'] = $data['msg'] ?? 'No message'; // Use null coalescing operator to handle missing message
+        } else {
+            $data['from'] = 'Unknown';
+            $data['msg'] = 'No user data found';
+        }
+
+        $data['dt'] = date("d-m-Y h:i:s");
+
+        foreach ($this->clients as $client) {
+            if ($from !== $client) {
+                $data['from'] = 'Me';
+            }
+        }
+        $client->send(json_encode($data));
     }
+
 
     public function onClose(ConnectionInterface $conn)
     {

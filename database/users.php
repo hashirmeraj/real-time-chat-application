@@ -131,6 +131,37 @@ class Users
         $stmt->close();
     }
 
+    public function getUserByid($id)
+    {
+        // SQL query to select the user with the given id
+        $sql = "SELECT * FROM users WHERE id = ?";
+
+        // Prepare the statement
+        $stmt = $this->dbConn->prepare($sql);
+
+        // Bind the id parameter (integer type)
+        $stmt->bind_param("i", $id);
+
+        // Execute the query
+        $stmt->execute();
+
+        // Get the result
+        $result = $stmt->get_result();
+
+        // Fetch the user data (if found)
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc(); // Return user data as an associative array
+        } else {
+            return null; // No user found with the provided id
+        }
+
+        // Close the statement
+        $stmt->close();
+    }
+
+
+
+
     public function updateLoginStatus()
     {
         $sql = "UPDATE `users` SET `login_status`= ?,`last_login`= ? WHERE `id` = ?";
