@@ -67,7 +67,7 @@ $userId = $_SESSION['userId'];
         </aside>
         <div class="right w-[73%] h-full bg-slate-900 rounded-l-2xl">
             <div class="chatarea w-full h-full p-8 ">
-                <div class="display-chat w-full h-[93%]   flex flex-col  overflow-y-auto" id="chatArea">
+                <div class="display-chat w-full h-[93%]   flex flex-col  scrollable-content pr-2" id="chatArea">
 
                     <!-- message -->
                     <div class="message-area flex w-full justify-start">
@@ -85,7 +85,7 @@ $userId = $_SESSION['userId'];
                         </div>
                     </div>
                     <!-- sending message -->
-                    <div class="message-area flex w-full justify-end">
+                    <div class="message-area flex w-full justify-end ">
                         <div class="users flex  w-2/5 mb-4 ">
                             <div class="users-img"> <img class=" w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
                             <div class="details flex justify-between w-full  ml-4 bg-gray-700 p-2 rounded-b-xl">

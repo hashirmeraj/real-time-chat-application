@@ -5,4 +5,36 @@
     @apply flex justify-between w-full ml-4 bg-gray-700 p-2 rounded-b-xl
 }
 
+/* Target the scrollbar */
+.scrollable-content {
+    height: 30px;
+    overflow-y: auto;
+}
+
+/* Customize the scrollbar width */
+.scrollable-content::-webkit-scrollbar {
+    width: 2px;
+    /* Width of the scrollbar */
+}
+
+/* Customize the track (background) */
+.scrollable-content::-webkit-scrollbar-track {
+    background-color: gray;
+    /* Track background color */
+}
+
+/* Customize the thumb (scroll handle) */
+.scrollable-content::-webkit-scrollbar-thumb {
+    background-color: #1f2937;
+    /* Dark gray thumb color */
+    border-radius: 8px;
+    /* Rounded corners for the thumb */
+}
+
+/* Optional: change thumb color when hovered */
+.scrollable-content::-webkit-scrollbar-thumb:hover {
+    background-color: #4a5568;
+    /* Lighter gray on hover */
+}
+
 @tailwind utilities;
