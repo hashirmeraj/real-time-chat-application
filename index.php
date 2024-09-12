@@ -66,8 +66,8 @@ $userId = $_SESSION['userId'];
             </div>
         </aside>
         <div class="right w-[73%] h-full bg-slate-900 rounded-l-2xl">
-            <div class="chatarea w-full h-max p-8" id="chatArea">
-                <div class="display-chat w-full  h-full flex flex-col ">
+            <div class="chatarea w-full h-full p-8 ">
+                <div class="display-chat w-full h-[93%]   flex flex-col  overflow-y-auto" id="chatArea">
 
                     <!-- message -->
                     <div class="message-area flex w-full justify-start">
@@ -100,19 +100,31 @@ $userId = $_SESSION['userId'];
                         </div>
                     </div>
 
+
+                    <!-- testing text -->
+
+                    <div class="typing-area ">
+                        <form id="chat-room-form" action="" method="post">
+                            <div class="form-controll  w-[70%] flex    fixed bottom-5  bg-slate-900 ">
+                                <input type="hidden" id="userId" name="userId" value="<?php echo $userId ?>">
+                                <input id="message" name="message" class="  rounded-lg  p-1 w-4/5 focus:outline-none" type="text" placeholder="Type here..." maxlength="1000" required>
+                                <button id="send" type="submit" class=" h-10 w-10 rounded-full text-gray-400 focus:text-white "><i class="fa-solid fa-paper-plane  text-2xl"></i></button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <!-- sending end -->
 
 
-                <div class="typing-area ">
+                <!-- <div class="typing-area ">
                     <form id="chat-room-form" action="" method="post">
-                        <div class="form-controll  w-2/3 flex  justify-around  fixed bottom-5 ">
+                        <div class="form-controll  w-2/3 flex  justify-around  fixed bottom-5  bg-slate-900">
                             <input type="hidden" id="userId" name="userId" value="<?php echo $userId ?>">
                             <input id="message" name="message" class="  rounded-lg  p-1 w-11/12 focus:outline-none" type="text" placeholder="Type here..." maxlength="1000" required>
                             <button id="send" type="submit" class=" h-10 w-10 rounded-full text-gray-400 focus:text-white "><i class="fa-solid fa-paper-plane  text-2xl"></i></button>
                         </div>
                     </form>
-                </div>
+                </div> -->
             </div>
 
             <!-- typing area -->
