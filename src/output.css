@@ -729,10 +729,6 @@ video {
   width: 73%;
 }
 
-.w-\[90\%\] {
-  width: 90%;
-}
-
 .w-full {
   width: 100%;
 }
@@ -779,6 +775,10 @@ video {
 
 .overflow-hidden {
   overflow: hidden;
+}
+
+.break-words {
+  overflow-wrap: break-word;
 }
 
 .rounded-3xl {
@@ -907,6 +907,10 @@ video {
   padding-left: 2.5rem;
 }
 
+.pl-5 {
+  padding-left: 1.25rem;
+}
+
 .pr-2 {
   padding-right: 0.5rem;
 }
@@ -917,10 +921,6 @@ video {
 
 .pt-10 {
   padding-top: 2.5rem;
-}
-
-.pl-5 {
-  padding-left: 1.25rem;
 }
 
 .text-center {

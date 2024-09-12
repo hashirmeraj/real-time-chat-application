@@ -22,13 +22,14 @@ $(document).ready(function () {
                     <div class="details flex justify-between w-full ml-4 bg-gray-700 p-2 rounded-b-xl">
                         <div class="username text-white">
                             <span class="block font-bold">`+ data.from + `</span>
-                            <span>`+ data.msg + `</span>
+                            <span class="message-text break-words">`+ data.msg + `</span>
                         </div>
-                        <div class="time">5:30</div>
+                        <div class="time text-white ml-4">`+ data.dt + `</div>
                     </div>
                 </div>
             </div>
         `;
+
         } else {
             var html_data = `
     <div class="message-area flex w-full justify-start">
@@ -39,13 +40,14 @@ $(document).ready(function () {
             <div class="details flex justify-between w-full ml-4 bg-gray-700 p-2 rounded-b-xl">
                 <div class="username text-white">
                     <span class="block font-bold">`+ data.from + `</span>
-                    <span>`+ data.msg + `</span>
+                    <span class="message-text break-words">`+ data.msg + `</span>
                 </div>
-                <div class="time">5:30</div>
+                <div class="time text-white ml-4">`+ data.dt + `</div>
             </div>
         </div>
     </div>
 `;
+
         }
 
         $('#chatArea').append(html_data);
