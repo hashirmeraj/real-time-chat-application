@@ -18,10 +18,10 @@
 }
 
 /* Customize the track (background) */
-.scrollable-content::-webkit-scrollbar-track {
+/* .scrollable-content::-webkit-scrollbar-track {
     background-color: gray;
-    /* Track background color */
-}
+    
+} */
 
 /* Customize the thumb (scroll handle) */
 .scrollable-content::-webkit-scrollbar-thumb {
