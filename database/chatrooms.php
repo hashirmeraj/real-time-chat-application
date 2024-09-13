@@ -1,5 +1,5 @@
 <?php
-class chatrooms
+class Chatrooms
 {
     private $id;
     private $userId;
@@ -57,20 +57,20 @@ class chatrooms
         return $this->dbConn;
     }
 
-    function __construct()
+    // Constructor to establish database connection
+    public function __construct()
     {
-        require_once './config.php';
-        $db = new DbConnect();
-        $this->dbConn = $db->connect();
+        require_once './database/config.php'; // Include the database config file
+        $db = new DbConnect(); // Create a new DbConnect object
+        $this->dbConn = $db->connect(); // Assign the database connection
     }
 
+    // Method to save chatroom message to the database
     public function saveChatroom()
     {
-
-        $sql = "INSERT INTO `chatrooms`( `userid`, `msg`, `createdOn`) VALUES (?, ?, ?,)";
-        $stmt = $this->dbConn->prepare($sql);
-        $stmt->bind_param("iss", $this->userId, $this->msg, $this->createdOn);
-
+        $sql = "INSERT INTO `chatrooms`( `userid`, `msg`, `createdOn`) VALUES (?, ?, ?)";
+        $stmt = $this->dbConn->prepare($sql); // Prepare the SQL statement
+        $stmt->bind_param("iss", $this->userId, $this->msg, $this->createdOn); // Bind parameters
 
         try {
             // Execute the prepared statement
@@ -81,10 +81,19 @@ class chatrooms
             }
         } catch (Exception $e) {
             // Catch any exceptions and print the error message
-            echo $e->getMessage();
+            echo 'Error: ' . $e->getMessage();
+            return false;
+        } finally {
+            // Close the statement to free resources
+            $stmt->close();
         }
+    }
 
-        // Close the statement
-        $stmt->close();
+    // Destructor to close the database connection when the object is destroyed
+    public function __destruct()
+    {
+        if ($this->dbConn) {
+            $this->dbConn->close();
+        }
     }
 }

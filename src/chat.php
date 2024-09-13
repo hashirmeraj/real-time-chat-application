@@ -7,6 +7,7 @@ use Ratchet\ConnectionInterface;
 use Users;
 
 require __DIR__ . '/../database/users.php';
+require __DIR__ . '/../database/chatrooms.php';
 
 
 class Chat implements MessageComponentInterface
@@ -44,20 +45,32 @@ class Chat implements MessageComponentInterface
             return;
         }
 
-        $objUser = new \Users();
-        $user = $objUser->getUserByid($data['userId']);
 
-        // Check if user is found
-        if ($user) {
-            $data['from'] = $user['name'] ?? 'Unknown'; // Use null coalescing operator to handle missing data
-            $data['msg'] = $data['msg'] ?? 'No message'; // Use null coalescing operator to handle missing message
-        } else {
-            $data['from'] = 'Unknown';
-            $data['msg'] = 'No user data found';
+        // save chat to database
+        $objChatroom = new \chatrooms();
+        $objChatroom->setUserId($data['userId']);
+        $objChatroom->setMsg($data['msg']);
+        $objChatroom->setCreatedOn(date("Y-m-d h:i:s"));
+
+        if ($objChatroom->saveChatroom()) {
+
+
+
+            // for name
+            $objUser = new \Users();
+            $user = $objUser->getUserByid($data['userId']);
+
+            // Check if user is found
+            if ($user) {
+                $data['from'] = $user['name'] ?? 'Unknown'; // Use null coalescing operator to handle missing data
+                $data['msg'] = $data['msg'] ?? 'No message'; // Use null coalescing operator to handle missing message
+            } else {
+                $data['from'] = 'Unknown';
+                $data['msg'] = 'No user data found';
+            }
+
+            $data['dt'] = date("d-m-Y h:i:s");
         }
-
-        $data['dt'] = date("d-m-Y h:i:s");
-
         foreach ($this->clients as $client) {
             if ($from !== $client) {
                 // For all other clients
