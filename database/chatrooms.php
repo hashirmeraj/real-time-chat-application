@@ -70,5 +70,21 @@ class chatrooms
         $sql = "INSERT INTO `chatrooms`( `userid`, `msg`, `createdOn`) VALUES (?, ?, ?,)";
         $stmt = $this->dbConn->prepare($sql);
         $stmt->bind_param("iss", $this->userId, $this->msg, $this->createdOn);
+
+
+        try {
+            // Execute the prepared statement
+            if ($stmt->execute()) {
+                return true; // Return true if the query is successful
+            } else {
+                return false; // Return false if the query fails
+            }
+        } catch (Exception $e) {
+            // Catch any exceptions and print the error message
+            echo $e->getMessage();
+        }
+
+        // Close the statement
+        $stmt->close();
     }
 }
