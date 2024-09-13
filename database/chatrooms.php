@@ -69,6 +69,6 @@ class chatrooms
 
         $sql = "INSERT INTO `chatrooms`( `userid`, `msg`, `createdOn`) VALUES (?, ?, ?,)";
         $stmt = $this->dbConn->prepare($sql);
-        
+        $stmt->bind_param("iss", $this->userId, $this->msg, $this->createdOn);
     }
 }
