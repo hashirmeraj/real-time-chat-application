@@ -1,6 +1,6 @@
 <?php
 session_start();
-$userId = $_SESSION['userId'];
+$loggedinId = $_SESSION['userId'];
 ?>
 <!doctype html>
 <html>
@@ -101,6 +101,42 @@ $userId = $_SESSION['userId'];
                         </div>
                     </div>
 
+                    <!-- showing message from database -->
+                    <?php
+                    require './database/chatrooms.php';
+                    $objChatroom = new Chatrooms();
+                    $result = $objChatroom->getAllmsg();  // Get the result set from the method
+
+                    // Loop through the result set and fetch rows as associative arrays
+                    while ($chatroom = $result->fetch_assoc()) {
+                        // Checking if the logged-in user is the sender
+                        if ($chatroom['userid'] == $loggedinId) {
+                            $justify = "justify-end";
+                            $fromName = "Me";
+                        } else {
+                            $justify = "justify-start"; // Show other users' messages on the left
+                            $fromName = $chatroom['name'];
+                        }
+
+                        // Showing message
+                        echo '
+        <div class="message-area flex w-full ' . $justify . '">
+            <div class="users flex w-2/5 mb-4">
+                <div class="users-img">
+                    <img class="w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="">
+                </div>
+                <div class="details flex justify-between w-full ml-4 bg-gray-700 p-2 rounded-b-xl">
+                    <div class="username text-white">
+                        <span class="block font-bold">' . $fromName . '</span>
+                        <span class="message-text break-words">' . $chatroom['msg'] . '</span>
+                    </div>
+                    <div class="time">' . $chatroom['createdOn'] . '</div>
+                </div>
+            </div>
+        </div>
+    ';
+                    }
+                    ?>
 
 
 
@@ -109,7 +145,7 @@ $userId = $_SESSION['userId'];
                     <div class="typing-area ">
                         <form id="chat-room-form" action="" method="post">
                             <div class="form-controll  w-[70%] flex    fixed bottom-5  bg-slate-900 ">
-                                <input type="hidden" id="userId" name="userId" value="<?php echo $userId ?>">
+                                <input type="hidden" id="userId" name="userId" value="<?php echo $loggedinId ?>">
                                 <input id="message" name="message" class="  rounded-lg  p-1 pl-5 w-11/12 focus:outline-none" type="text" placeholder="Type a message" maxlength="1000" required>
                                 <button id="send" type="submit" class=" h-10 w-10 rounded-full text-gray-400 focus:text-white "><i class="fa-solid fa-paper-plane  text-2xl"></i></button>
                             </div>

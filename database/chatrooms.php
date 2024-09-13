@@ -108,9 +108,7 @@ class Chatrooms
 
         // Get the result set from the statement
         $result = $stmt->get_result();
-
-        // Fetch the row as an associative array
-        $chatroom = $result->fetch_assoc();
+        return $result;
 
         // Close the statement
         $stmt->close();
