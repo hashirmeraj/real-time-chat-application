@@ -98,23 +98,15 @@ class Chatrooms
     }
 
 
-    public function getUserByid($id)
+    public function getAllmsg()
     {
-        // SQL query to select the user with the given id
-        $sql = "SELECT * FROM users WHERE id = ?";
 
-        // Prepare the statement
-        $stmt = $this->dbConn->prepare($sql);
-
-        // Bind the id parameter (integer type)
-        $stmt->bind_param("i", $id);
+        $stmt = $this->dbConn->prepare("SELECT c.*, u.name FROM chatrooms c JOIN users u ON(c.userid = u.id)");
 
         // Execute the query
         $stmt->execute();
 
-        // Get the result
-        $result = $stmt->get_result();
-
+        $Chatroom = $stmt->fetch_assoc($stmt);
 
         // Close the statement
         $stmt->close();
