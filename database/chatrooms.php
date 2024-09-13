@@ -106,7 +106,11 @@ class Chatrooms
         // Execute the query
         $stmt->execute();
 
-        $Chatroom = $stmt->fetch_assoc($stmt);
+        // Get the result set from the statement
+        $result = $stmt->get_result();
+
+        // Fetch the row as an associative array
+        $chatroom = $result->fetch_assoc();
 
         // Close the statement
         $stmt->close();
