@@ -39,7 +39,14 @@ $loggedinId = $_SESSION['userId'];
 
                     </div>
 
-                    <!-- example -->
+                    <!-- User Area -->
+                    <?php
+                    require './database/users.php';
+                    $objUser = new Users();
+                    $result = $objUser->getRestUserByid($loggedinId);
+
+                    ?>
+
                     <div class="users flex mt-6">
                         <div class="users-img"> <img class=" w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
                         <div class="details flex justify-between w-full  ml-4">
