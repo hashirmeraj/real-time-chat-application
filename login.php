@@ -30,7 +30,7 @@ if (isset($_POST['join'])) {
             $_SESSION['loggedIn'] = true;
             header("Location:./index.php?login=w");
             exit();
-            echo 'Welcome';
+            
         }
     }
 }
