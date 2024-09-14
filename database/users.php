@@ -161,8 +161,10 @@ class Users
 
     public function getRestUserByid($id)
     {
-        // SQL query to select the user with the given id
-        $sql = "SELECT * FROM users WHERE id != ?";
+        // SQL query to select the rest user with the given id
+
+        $sql = "SELECT u.*, c.msg FROM users u JOIN chatroom c ON(u.id = c.userid )";
+
 
         // Prepare the statement
         $stmt = $this->dbConn->prepare($sql);
