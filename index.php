@@ -53,7 +53,7 @@ $loggedinId = $_SESSION['userId'];
                                     <div class="username  ">
                                         <span class="block font-bold">' . $users['name'] . '</span>
 
-                                        <span></span>
+                                        <span>' . substr($users['msg'], 0, 20) . ' ...</span>
                                     </div>
                                     <div class="time">5:30</div>
                                     

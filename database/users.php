@@ -161,10 +161,17 @@ class Users
 
     public function getRestUserByid($id)
     {
-        // SQL query to select the rest user with the given id
-
-        $sql = "SELECT u.*, c.msg FROM users u JOIN chatroom c ON(u.id = c.userid )";
-
+        // SQL query to get the latest message for each user except the given id
+        $sql = "SELECT u.*, c.msg
+            FROM users u
+            JOIN chatrooms c ON u.id = c.userid
+            WHERE u.id != ? 
+            AND c.createdOn = (
+                SELECT MAX(c2.createdOn) 
+                FROM chatrooms c2 
+                WHERE c2.userid = u.id
+            )
+            ORDER BY c.createdOn DESC";
 
         // Prepare the statement
         $stmt = $this->dbConn->prepare($sql);
@@ -176,13 +183,15 @@ class Users
         $stmt->execute();
 
         // Get the result
-        return $result = $stmt->get_result();
-
-
+        $result = $stmt->get_result();
 
         // Close the statement
         $stmt->close();
+
+        return $result;
     }
+
+
 
 
 
