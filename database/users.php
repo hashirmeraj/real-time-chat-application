@@ -174,14 +174,9 @@ class Users
         $stmt->execute();
 
         // Get the result
-        $result = $stmt->get_result();
+        return $result = $stmt->get_result();
 
-        // Fetch the user data (if found)
-        if ($result->num_rows > 0) {
-            return $result->fetch_assoc(); // Return user data as an associative array
-        } else {
-            return null; // No user found with the provided id
-        }
+
 
         // Close the statement
         $stmt->close();

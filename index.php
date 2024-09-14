@@ -20,12 +20,12 @@ $loggedinId = $_SESSION['userId'];
 
 <body>
     <div class="main flex w-screen h-screen bg-slate-500 justify-between ">
-        <aside class="left h-screen w-1/4 text-white">
+        <aside class="left h-screen w-1/4 text-white ">
             <div class="h-full w-full  bg-gray-900 rounded-r-2xl flex flex-col items-center pt-10 ">
                 <div class="heading">
                     <h1>Chat</h1>
                 </div>
-                <div class="flex flex-col w-4/5 p-1 ">
+                <div class="flex flex-col w-4/5  p-2 scrollable-content h-full">
                     <div class="users flex mt-6">
                         <div class="users-img"> <img class=" w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
                         <div class="details flex justify-between w-full  ml-4">
@@ -45,6 +45,24 @@ $loggedinId = $_SESSION['userId'];
                     $objUser = new Users();
                     $result = $objUser->getRestUserByid($loggedinId);
 
+                    while ($users = $result->fetch_assoc()) {
+                        echo '
+                            <div class="users flex mt-6">
+                                <div class="users-img"> <img class=" w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
+                                <div class="details flex justify-between w-full  ml-4">
+                                    <div class="username  ">
+                                        <span class="block font-bold">' . $users['name'] . '</span>
+
+                                        <span></span>
+                                    </div>
+                                    <div class="time">5:30</div>
+                                    
+                                </div>
+
+                            </div>
+                        
+                        ';
+                    }
                     ?>
 
                     <div class="users flex mt-6">
