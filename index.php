@@ -27,7 +27,9 @@ $loggedinId = $_SESSION['userId'];
                 </div>
                 <div class="flex flex-col w-4/5  p-2 scrollable-content h-full">
                     <div class="users flex mt-6">
-                        <div class="users-img"> <img class=" w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
+                        <div class="users-img">
+                            <div class="status h-3 w-3 rounded-xl bg-green-600 "></div> <img class=" w-[55px] h-[45px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset="">
+                        </div>
                         <div class="details flex justify-between w-full  ml-4">
                             <div class="username font-semibold ">
                                 <span class="block font-bold">Hashir Meraj</span>
@@ -57,7 +59,7 @@ $loggedinId = $_SESSION['userId'];
                         $time = $datetime->format('H:i');
                         echo '
                             <div class="users flex mt-6">
-                                <div class="users-img"> <img class=" w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
+                                <div class="users-img"> <div class="status h-3 w-3 rounded-xl bg-green-600 "></div> <img class=" w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
                                 <div class="details flex justify-between w-full  ml-4">
                                     <div class="username  ">
                                         <span class="block font-bold">' . $users['name'] . '</span>
