@@ -142,7 +142,7 @@ $loggedinId = $_SESSION['userId'];
                         $time = $datetime->format('H:i');
                         // Showing message
                         echo '
-        <div class="message-area flex w-full ' . $justify . '">
+                    <div class="message-area flex w-full ' . $justify . '">
             <div class="users flex w-2/5 mb-4">
                 <div class="users-img">
                     <img class="w-[40px] h-[35px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="">
@@ -155,7 +155,7 @@ $loggedinId = $_SESSION['userId'];
                     <div class="time">' . $time . '</div>
                 </div>
             </div>
-        </div>
+                    </div>
     ';
                     }
                     ?>
@@ -177,15 +177,7 @@ $loggedinId = $_SESSION['userId'];
                 <!-- sending end -->
 
 
-                <!-- <div class="typing-area ">
-                    <form id="chat-room-form" action="" method="post">
-                        <div class="form-controll  w-2/3 flex  justify-around  fixed bottom-5  bg-slate-900">
-                            <input type="hidden" id="userId" name="userId" value="<?php echo $userId ?>">
-                            <input id="message" name="message" class="  rounded-lg  p-1 w-11/12 focus:outline-none" type="text" placeholder="Type here..." maxlength="1000" required>
-                            <button id="send" type="submit" class=" h-10 w-10 rounded-full text-gray-400 focus:text-white "><i class="fa-solid fa-paper-plane  text-2xl"></i></button>
-                        </div>
-                    </form>
-                </div> -->
+
             </div>
 
             <!-- typing area -->
