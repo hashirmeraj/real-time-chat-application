@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Karachi'); // Change to your desired time zone
 
 use Ratchet\Server\IoServer;
 use Ratchet\Http\HttpServer;

@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set('Asia/Karachi'); // Change to your desired time zone
+
 class DbConnect
 {
     private $servername = 'localhost:3307'; // Server name, including port if not the default (3306)

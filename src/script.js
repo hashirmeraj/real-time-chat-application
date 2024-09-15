@@ -12,6 +12,8 @@ $(document).ready(function () {
         console.log(e.data);
         // Uncomment if you want to display the received message
         var data = JSON.parse(e.data);
+        var dateTime = new Date(data.dt);  // Create a Date object from the string
+        var localTime = dateTime.toLocaleString();  // Convert to user's local time format
         if (data.from == 'Me') {
 
             var html_data = `
