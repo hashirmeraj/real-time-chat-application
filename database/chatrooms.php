@@ -68,9 +68,9 @@ class Chatrooms
     // Method to save chatroom message to the database
     public function saveChatroom()
     {
-        $sql = "INSERT INTO `chatrooms`( `userid`, `msg`, `createdOn`) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO `chatrooms`( `userid`, `msg`) VALUES (?, ?)";
         $stmt = $this->dbConn->prepare($sql); // Prepare the SQL statement
-        $stmt->bind_param("iss", $this->userId, $this->msg, $this->createdOn); // Bind parameters
+        $stmt->bind_param("is", $this->userId, $this->msg); // Bind parameters
 
         try {
             // Execute the prepared statement

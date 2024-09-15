@@ -50,7 +50,7 @@ class Chat implements MessageComponentInterface
         $objChatroom = new \chatrooms();
         $objChatroom->setUserId($data['userId']);
         $objChatroom->setMsg($data['msg']);
-        $objChatroom->setCreatedOn(date("Y-m-d h:i:s"));
+
 
         if ($objChatroom->saveChatroom()) {
 

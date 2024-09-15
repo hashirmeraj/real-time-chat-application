@@ -162,7 +162,7 @@ class Users
     public function getRestUserByid($id)
     {
         // SQL query to get the latest message for each user except the given id
-        $sql = "SELECT u.*, c.msg
+        $sql = "SELECT u.*, c.msg, c.createdOn
             FROM users u
             JOIN chatrooms c ON u.id = c.userid
             WHERE u.id != ? 

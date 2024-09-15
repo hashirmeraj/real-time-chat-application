@@ -46,6 +46,15 @@ $loggedinId = $_SESSION['userId'];
                     $result = $objUser->getRestUserByid($loggedinId);
 
                     while ($users = $result->fetch_assoc()) {
+
+                        if (strlen($users['msg']) > 20) {
+                            $msg = substr($users['msg'], 0, 20) . "...";
+                        } else {
+                            $msg = $users['msg'];
+                        }
+
+                        $datetime = new DateTime($users['createdOn']);
+                        $time = $datetime->format('H:i');
                         echo '
                             <div class="users flex mt-6">
                                 <div class="users-img"> <img class=" w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
@@ -53,9 +62,10 @@ $loggedinId = $_SESSION['userId'];
                                     <div class="username  ">
                                         <span class="block font-bold">' . $users['name'] . '</span>
 
-                                        <span>' . substr($users['msg'], 0, 20) . ' ...</span>
+                                        <span>'  . $msg . '</span>
                                     </div>
-                                    <div class="time">5:30</div>
+                                    
+                                    <div class="time">' . $time . '</div>
                                     
                                 </div>
 
@@ -64,31 +74,6 @@ $loggedinId = $_SESSION['userId'];
                         ';
                     }
                     ?>
-
-                    <div class="users flex mt-6">
-                        <div class="users-img"> <img class=" w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
-                        <div class="details flex justify-between w-full  ml-4">
-                            <div class="username  ">
-                                <span class="block font-bold">Hashir Meraj</span>
-
-                                <span>This is text</span>
-                            </div>
-                            <div class="time">5:30</div>
-                        </div>
-
-                    </div>
-                    <div class="users flex mt-6">
-                        <div class="users-img"> <img class=" w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
-                        <div class="details flex justify-between w-full  ml-4">
-                            <div class="username font-semibold ">
-                                <span class="block font-bold">Hashir Meraj</span>
-
-                                <span>This is text</span>
-                            </div>
-                            <div class="time">5:30</div>
-                        </div>
-
-                    </div>
 
                     <!-- Example End -->
                 </div>
