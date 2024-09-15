@@ -68,7 +68,7 @@ class Chat implements MessageComponentInterface
             }
 
             // Use a correct time format with a proper timezone
-            $data['dt'] = date("d-m-Y h:i:s A"); // Updated to show AM/PM for clarity
+            $data['dt'] = date("h:i A"); // Updated to show AM/PM for clarity
         }
 
         foreach ($this->clients as $client) {

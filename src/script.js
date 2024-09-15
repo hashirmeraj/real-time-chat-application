@@ -51,11 +51,26 @@ $(document).ready(function () {
                     </div>
         </div >
                 `;
+            var html_user = `
+            <div class="users flex mt-6">
+                            <div class="users-img flex flex-col justify-start"> <div class="status h-3 w-3 rounded-xl bg-green-600 "></div> <img class=" w-[55px] h-[45px] rounded-full -mt-2" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
+                            <div class="details flex justify-between w-full  ml-4">
+                                <div class="username  ">
+                                    <span class="block font-bold">`+ data.from + `</span>
+                                    <span>'  . $msg . '</span>
+                                </div>
+                                
+                                <div class="time">' . $time . '</div>
+                                
+                            </div>
+                        </div>
+        `;
 
         }
 
         $('#chatArea').append(html_data);
         $('#chat_message').val('');  // Clear the message input after sending
+
     };
 
     // Function to send message through the established WebSocket connection

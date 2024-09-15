@@ -25,7 +25,7 @@ $loggedinId = $_SESSION['userId'];
                 <div class="heading">
                     <h1>Chat</h1>
                 </div>
-                <div class="flex flex-col w-4/5  p-2 scrollable-content h-full">
+                <div class="flex flex-col w-4/5  p-2 scrollable-content h-full" id="user-display">
                     <div class="users flex mt-6">
                         <div class="users-img flex flex-col items-start">
                             <div class="status h-3 w-3 rounded-xl bg-green-600  "></div> <img class=" w-[55px] h-[45px] rounded-full -mt-2" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset="">
