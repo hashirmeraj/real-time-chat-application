@@ -4,7 +4,11 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     header("Location:./login.php");
     exit();
 }
+require './database/users.php';
 $loggedinId = $_SESSION['userId'];
+$objLoggedUser = new Users();
+$result = $objLoggedUser->getUserByid($loggedinId);
+$loggedinUser = $result['name'];
 ?>
 <!doctype html>
 <html>
@@ -22,9 +26,14 @@ $loggedinId = $_SESSION['userId'];
     <div class="main flex w-screen h-screen bg-slate-500 justify-between ">
         <aside class="left h-screen w-1/4 text-white ">
             <div class="h-full w-full  bg-gray-900 rounded-r-2xl flex flex-col items-center pt-10 ">
-                <div class="heading">
-                    <h1>Chat</h1>
+                <div class="user-section w-full   flex items-center ">
+                    <div class="profile ml-9"><img class="w-[60px] h-[60px]  rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
+                    <div class="name  ml-9 text-xl"> <?php echo $loggedinUser ?></div>
                 </div>
+                <div class="user-section w-full   flex items-center ">
+                    <input class=" w-4/5 p-2 rounded-4xl " type="search" placeholder="Search Name...">
+                </div>
+
                 <div class="flex flex-col w-4/5  p-2 scrollable-content h-full" id="userDisplay">
                     <div class="users flex mt-6">
                         <div class="users-img flex flex-col items-start">
@@ -43,7 +52,7 @@ $loggedinId = $_SESSION['userId'];
 
                     <!-- User Area -->
                     <?php
-                    require './database/users.php';
+
                     $objUser = new Users();
                     $result = $objUser->getRestUserByid($loggedinId);
 
@@ -61,7 +70,8 @@ $loggedinId = $_SESSION['userId'];
                         }
 
                         $datetime = new DateTime($users['createdOn']);
-                        $time = $datetime->format('H:i');
+                        $time = $datetime->format('h:i A');  // 
+
                         echo '
                             <div class="users flex mt-6">
                                 <div class="users-img flex flex-col justify-start"> <div class="status h-3 w-3 rounded-xl ' . $status . ' "></div> <img class=" w-[55px] h-[45px] rounded-full -mt-2" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
@@ -139,7 +149,7 @@ $loggedinId = $_SESSION['userId'];
                             $fromName = $chatroom['name'];
                         }
                         $datetime = new DateTime($chatroom['createdOn']);
-                        $time = $datetime->format('H:i');
+                        $time = $datetime->format('h:i A');
                         // Showing message
                         echo '
                     <div class="message-area flex w-full ' . $justify . '">

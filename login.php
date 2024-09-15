@@ -130,10 +130,7 @@ if (isset($_POST['join'])) {
         </div>
     </div>
 
-    <!-- Php For joining chat room -->
-    <?php
 
-    ?>
 </body>
 
 </html>
