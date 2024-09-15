@@ -28,6 +28,8 @@ class Chat implements MessageComponentInterface
     }
     public function onMessage(ConnectionInterface $from, $msg)
     {
+        date_default_timezone_set('Asia/Karachi'); // Set the correct timezone
+
         $numRecv = count($this->clients) - 1;
         echo sprintf(
             'Connection %d sending message "%s" to %d other connection%s' . "\n",
@@ -45,18 +47,14 @@ class Chat implements MessageComponentInterface
             return;
         }
 
-
-        // save chat to database
+        // Save chat to database
         $objChatroom = new \chatrooms();
         $objChatroom->setUserId($data['userId']);
         $objChatroom->setMsg($data['msg']);
 
-
         if ($objChatroom->saveChatroom()) {
 
-
-
-            // for name
+            // For name
             $objUser = new \Users();
             $user = $objUser->getUserByid($data['userId']);
 
@@ -69,8 +67,10 @@ class Chat implements MessageComponentInterface
                 $data['msg'] = 'No user data found';
             }
 
-            $data['dt'] = date("d-m-Y h:i:s");
+            // Use a correct time format with a proper timezone
+            $data['dt'] = date("d-m-Y h:i:s A"); // Updated to show AM/PM for clarity
         }
+
         foreach ($this->clients as $client) {
             if ($from !== $client) {
                 // For all other clients
@@ -82,6 +82,7 @@ class Chat implements MessageComponentInterface
             $client->send(json_encode($data));
         }
     }
+
 
 
     public function onClose(ConnectionInterface $conn)

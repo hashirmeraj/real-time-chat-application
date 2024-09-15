@@ -13,40 +13,42 @@ $(document).ready(function () {
         // Uncomment if you want to display the received message
         var data = JSON.parse(e.data);
         if (data.from == 'Me') {
+
             var html_data = `
             <div class="message-area flex w-full justify-end">
-                <div class="users flex w-2/5 mb-4">
-                    <div class="users-img">
-                        <img class="w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="">
+            <div class="users flex w-2/5 mb-4">
+                <div class="users-img">
+                    <img class="w-[40px] h-[35px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="">
+                </div>
+                <div class="details flex justify-between w-full ml-4 bg-gray-700 p-2 rounded-b-xl">
+                    <div class="username text-white">
+                        <span class="block font-bold">`+ data.from + `</span>
+                        <span class="message-text break-words">`+ data.msg + `</span>
                     </div>
-                    <div class="details flex justify-between w-full ml-4 bg-gray-700 p-2 rounded-b-xl">
-                        <div class="username text-white">
-                            <span class="block font-bold">`+ data.from + `</span>
-                            <span class="message-text break-words">`+ data.msg + `</span>
-                        </div>
-                        <div class="time text-white ml-4">`+ data.dt + `</div>
-                    </div>
+                    <div class="time">`+ data.dt + `</div>
                 </div>
             </div>
+        </div>
         `;
 
         } else {
+
             var html_data = `
-    <div class="message-area flex w-full justify-start">
-        <div class="users flex w-2/5 mb-4">
-            <div class="users-img">
-                <img class="w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="">
-            </div>
-            <div class="details flex justify-between w-full ml-4 bg-gray-700 p-2 rounded-b-xl">
-                <div class="username text-white">
-                    <span class="block font-bold">`+ data.from + `</span>
-                    <span class="message-text break-words">`+ data.msg + `</span>
-                </div>
-                <div class="time text-white ml-4">`+ data.dt + `</div>
-            </div>
-        </div>
-    </div>
-`;
+                < div class="message-area flex w-full justify-start" >
+                    <div class="users flex w-2/5 mb-4">
+                        <div class="users-img">
+                            <img class="w-[40px] h-[35px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="">
+                        </div>
+                        <div class="details flex justify-between w-full ml-4 bg-gray-700 p-2 rounded-b-xl">
+                            <div class="username text-white">
+                                <span class="block font-bold">`+ data.from + `</span>
+                                <span class="message-text break-words">`+ data.msg + `</span>
+                            </div>
+                            <div class="time">`+ data.dt + `</div>
+                        </div>
+                    </div>
+        </div >
+                `;
 
         }
 
@@ -55,22 +57,40 @@ $(document).ready(function () {
     };
 
     // Function to send message through the established WebSocket connection
-    $("#send").click(function (e) {
-        e.preventDefault(); // Prevent any default action
-        var userId = $("#userId").val();
-        var msg = $("#message").val();
-        var data = {
-            userId: userId,
-            msg: msg
-        };
+    $(document).ready(function () {
+        // Disable send button initially
+        $('#send').attr('disabled', true);
 
-        // Ensure the WebSocket connection is still open before sending
-        if (conn.readyState === WebSocket.OPEN) {
-            conn.send(JSON.stringify(data));
-            $("#message").val('');
-        } else {
-            console.log("WebSocket connection is not open.");
-        }
+        // Enable send button when input is not empty
+        $('#message').on('input', function () {
+            var message = $(this).val().trim();
+            if (message !== "") {
+                $('#send').attr('disabled', false);
+            } else {
+                $('#send').attr('disabled', true);
+            }
+        });
+
+        $("#send").click(function (e) {
+            e.preventDefault(); // Prevent any default action
+            var userId = $("#userId").val();
+            var msg = $("#message").val();
+            if (msg.trim() !== "") {
+                var data = {
+                    userId: userId,
+                    msg: msg
+                };
+
+                // Ensure the WebSocket connection is still open before sending
+                if (conn.readyState === WebSocket.OPEN) {
+                    conn.send(JSON.stringify(data));
+                    $("#message").val('');
+                    $('#send').attr('disabled', true); // Disable send button after sending
+                } else {
+                    console.log("WebSocket connection is not open.");
+                }
+            }
+        });
     });
 });
 

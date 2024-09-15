@@ -27,8 +27,8 @@ $loggedinId = $_SESSION['userId'];
                 </div>
                 <div class="flex flex-col w-4/5  p-2 scrollable-content h-full">
                     <div class="users flex mt-6">
-                        <div class="users-img">
-                            <div class="status h-3 w-3 rounded-xl bg-green-600 absolute "></div> <img class=" w-[55px] h-[45px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset="">
+                        <div class="users-img flex flex-col items-start">
+                            <div class="status h-3 w-3 rounded-xl bg-green-600  "></div> <img class=" w-[55px] h-[45px] rounded-full -mt-2" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset="">
                         </div>
                         <div class="details flex justify-between w-full  ml-4">
                             <div class="username font-semibold ">
@@ -54,12 +54,17 @@ $loggedinId = $_SESSION['userId'];
                         } else {
                             $msg = $users['msg'];
                         }
+                        if ($users['login_status'] == 1) {
+                            $status = "bg-green-600";
+                        } else {
+                            $status = "bg-red-600";
+                        }
 
                         $datetime = new DateTime($users['createdOn']);
                         $time = $datetime->format('H:i');
                         echo '
                             <div class="users flex mt-6">
-                                <div class="users-img"> <div class="status h-3 w-3 rounded-xl bg-green-600 "></div> <img class=" w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
+                                <div class="users-img flex flex-col justify-start"> <div class="status h-3 w-3 rounded-xl ' . $status . ' "></div> <img class=" w-[55px] h-[45px] rounded-full -mt-2" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
                                 <div class="details flex justify-between w-full  ml-4">
                                     <div class="username  ">
                                         <span class="block font-bold">' . $users['name'] . '</span>
@@ -88,7 +93,7 @@ $loggedinId = $_SESSION['userId'];
                     <!-- message -->
                     <div class="message-area flex w-full justify-start">
                         <div class="users flex  w-2/5 mb-4 ">
-                            <div class="users-img"> <img class=" w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
+                            <div class="users-img"> <img class=" w-[25px] h-[20px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
                             <div class="details flex justify-between w-full  ml-4 bg-gray-700 p-2 rounded-b-xl">
                                 <div class="username   text-white">
                                     <span class="block font-bold">Hashir Meraj</span>
@@ -133,20 +138,21 @@ $loggedinId = $_SESSION['userId'];
                             $justify = "justify-start"; // Show other users' messages on the left
                             $fromName = $chatroom['name'];
                         }
-
+                        $datetime = new DateTime($chatroom['createdOn']);
+                        $time = $datetime->format('H:i');
                         // Showing message
                         echo '
         <div class="message-area flex w-full ' . $justify . '">
             <div class="users flex w-2/5 mb-4">
                 <div class="users-img">
-                    <img class="w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="">
+                    <img class="w-[40px] h-[35px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="">
                 </div>
                 <div class="details flex justify-between w-full ml-4 bg-gray-700 p-2 rounded-b-xl">
                     <div class="username text-white">
                         <span class="block font-bold">' . $fromName . '</span>
                         <span class="message-text break-words">' . $chatroom['msg'] . '</span>
                     </div>
-                    <div class="time">' . $chatroom['createdOn'] . '</div>
+                    <div class="time">' . $time . '</div>
                 </div>
             </div>
         </div>
