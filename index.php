@@ -9,6 +9,36 @@ $loggedinId = $_SESSION['userId'];
 $objLoggedUser = new Users();
 $result = $objLoggedUser->getUserByid($loggedinId);
 $loggedinUser = $result['name'];
+
+
+// Handle form submission to unset session variables
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['close'])) {
+    unset($_SESSION['search']);
+    unset($_SESSION['searchResult']);
+}
+
+
+if (isset($_POST['searchName'])) {
+    $searchName = $_POST['searchName'];
+    $objSearch = new Users();
+    $result = $objSearch->getUserByName($searchName);
+
+    // Check if a user is found
+
+    if ($result->num_rows > 0) {
+        $_SESSION['search'] = "true";
+        $_SESSION['searchResult'] = $result; // Store the search result in session
+    } else {
+        $_SESSION['search'] = "false";
+        unset($_SESSION['searchResult']); // Clear the search result if no user is found
+    }
+}
+
+if (isset($_POST['leaveChat'])) {
+    $objUser->updateLoginStatus();
+    session_destroy();
+}
+
 ?>
 <!doctype html>
 <html>
@@ -24,71 +54,106 @@ $loggedinUser = $result['name'];
 
 <body>
     <div class="main flex w-screen h-screen bg-slate-500 justify-between ">
-        <aside class="left h-screen w-1/4 text-white ">
+        <aside class="left h-screen w-[25.9%] text-white ">
             <div class="h-full w-full  bg-gray-900 rounded-r-2xl flex flex-col items-center pt-10 ">
-                <div class="user-section w-full   flex items-center ">
+                <div class="user-section w-full   flex items-center justify-around">
                     <div class="profile ml-9"><img class="w-[60px] h-[60px]  rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
-                    <div class="name  ml-9 text-xl"> <?php echo $loggedinUser ?></div>
+                    <div class="name  text-xl"> <?php echo $loggedinUser ?></div>
+                    <div class="name  ml-9 text-xl">
+
+                        <form method="post">
+                            <button type="submit" name="leaveChat" class=" text-sm h-auto w-auto p-1 border-2 focus:bg-red-500 text-gray-500 border-gray-600 rounded-lg hover:bg-slate-800 hover:text-white hover:border-white ">Leave Chat</button>
+                        </form>
+
+                    </div>
                 </div>
-                <div class="user-section w-full   flex items-center  pl-11 mt-6">
-                    <input class="  w-4/5 p-2 rounded-full " type="search" placeholder="Search Name...">
+                <div class="user-section w-4/5 h-10 p-2 rounded-full  flex   mt-6  border-2 border-solid border-gray-400">
+                    <form action="" method="post" class="flex items-center w-full">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input class=" w-full p-2  bg-transparent focus:outline-none text-white cursor-pointer" type="search" name="searchName" placeholder="Search Name...">
+                    </form>
                 </div>
 
                 <div class="flex flex-col w-4/5  p-2 scrollable-content h-full" id="userDisplay">
-                    <div class="users flex mt-6">
-                        <div class="users-img flex flex-col items-start">
-                            <div class="status h-3 w-3 rounded-xl bg-green-600  "></div> <img class=" w-[55px] h-[45px] rounded-full -mt-2" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset="">
-                        </div>
-                        <div class="details flex justify-between w-full  ml-4">
-                            <div class="username font-semibold ">
-                                <span class="block font-bold">Hashir Meraj</span>
 
-                                <span>This is text</span>
-                            </div>
-                            <div class="time">5:30</div>
-                        </div>
-
-                    </div>
 
                     <!-- User Area -->
+
                     <?php
 
-                    $objUser = new Users();
-                    $result = $objUser->getRestUserByid($loggedinId);
+                    if (isset($_SESSION['search'])) {
+                        if ($_SESSION['search'] == "true" && isset($_SESSION['searchResult'])) {
+                            $result = $_SESSION['searchResult'];
 
-                    while ($users = $result->fetch_assoc()) {
+                            while ($exist = $result->fetch_assoc()) {
+                                if (strlen($exist['msg']) > 20) {
+                                    $msg = substr($exist['msg'], 0, 20) . "...";
+                                } else {
+                                    $msg = $exist['msg'];
+                                }
+                                $status = ($exist['login_status'] == 1) ? "bg-green-600" : "bg-red-600";
 
-                        if (strlen($users['msg']) > 20) {
-                            $msg = substr($users['msg'], 0, 20) . "...";
-                        } else {
-                            $msg = $users['msg'];
-                        }
-                        if ($users['login_status'] == 1) {
-                            $status = "bg-green-600";
-                        } else {
-                            $status = "bg-red-600";
-                        }
+                                $datetime = new DateTime($exist['createdOn']);
+                                $time = $datetime->format('h:i A');
 
-                        $datetime = new DateTime($users['createdOn']);
-                        $time = $datetime->format('h:i A');  // 
-
-                        echo '
+                                echo '
                             <div class="users flex mt-6">
-                                <div class="users-img flex flex-col justify-start"> <div class="status h-3 w-3 rounded-xl ' . $status . ' "></div> <img class=" w-[55px] h-[45px] rounded-full -mt-2" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
-                                <div class="details flex justify-between w-full  ml-4">
-                                    <div class="username  ">
-                                        <span class="block font-bold">' . $users['name'] . '</span>
-
-                                        <span>'  . $msg . '</span>
-                                    </div>
-                                    
-                                    <div class="time">' . $time . '</div>
-                                    
+                                <div class="users-img flex flex-col justify-start"> 
+                                    <div class="status h-3 w-3 rounded-xl ' . $status . '"></div>
+                                    <img class="w-[55px] h-[45px] rounded-full -mt-2" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="">
                                 </div>
+                                <div class="details flex justify-between w-full ml-4">
+                                    <div class="username">
+                                        <span class="block font-bold">' . htmlspecialchars($exist['name']) . '</span>
+                                        <span>' . htmlspecialchars($msg) . '</span>
+                                    </div>
+                                    <div class="time">' . htmlspecialchars($time) . '</div>
+                                </div>
+                            </div>';
+                                echo '<div class="user-section w-full h-10 p-2 flex mt-6 justify-end">
+                            <form method="post">
+                                <button type="submit" name="close" class=" h-auto w-auto p-2 border-2 focus:bg-black text-gray-500 border-gray-600 rounded-lg hover:bg-slate-800 hover:text-white active:bg-black">Close</button>
+                            </form>
+                        </div>';
+                            }
+                        } elseif ($_SESSION['search'] == "false") {
+                            echo '<p>No user found with that name.</p>';
+                            echo '<div class="user-section w-full h-10 p-2 flex mt-6 justify-end">
+                                <form method="post">
+                                    <button type="submit" name="close" class=" h-auto w-auto p-2 border-2 focus:bg-black text-gray-500 border-gray-600 rounded-lg hover:bg-slate-800 hover:text-white active:bg-black">Close</button>
+                                </form>
+                            </div>';
+                        }
+                    } else {
+                        $objUser = new Users();
+                        $result = $objUser->getRestUserByid($loggedinId);
 
+                        while ($users = $result->fetch_assoc()) {
+                            if (strlen($users['msg']) > 20) {
+                                $msg = substr($users['msg'], 0, 20) . "...";
+                            } else {
+                                $msg = $users['msg'];
+                            }
+                            $status = ($users['login_status'] == 1) ? "bg-green-600" : "bg-red-600";
+
+                            $datetime = new DateTime($users['createdOn']);
+                            $time = $datetime->format('h:i A');
+
+                            echo '
+                        <div class="users flex mt-6">
+                            <div class="users-img flex flex-col justify-start"> 
+                                <div class="status h-3 w-3 rounded-xl ' . $status . '"></div>
+                                <img class="w-[55px] h-[45px] rounded-full -mt-2" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="">
                             </div>
-                        
-                        ';
+                            <div class="details flex justify-between w-full ml-4">
+                                <div class="username">
+                                    <span class="block font-bold">' . htmlspecialchars($users['name']) . '</span>
+                                    <span>' . htmlspecialchars($msg) . '</span>
+                                </div>
+                                <div class="time">' . htmlspecialchars($time) . '</div>
+                            </div>
+                        </div>';
+                        }
                     }
                     ?>
 
@@ -96,41 +161,12 @@ $loggedinUser = $result['name'];
                 </div>
             </div>
         </aside>
-        <div class="right w-[73%] h-full bg-slate-900 rounded-l-2xl">
+        <div class="right w-[74%] h-full bg-slate-900 rounded-l-2xl">
             <div class="chatarea w-full h-full p-8 ">
                 <div class="display-chat w-full h-[93%]   flex flex-col  scrollable-content pr-2" id="chatArea">
 
                     <!-- message -->
-                    <div class="message-area flex w-full justify-start">
-                        <div class="users flex  w-2/5 mb-4 ">
-                            <div class="users-img"> <img class=" w-[25px] h-[20px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
-                            <div class="details flex justify-between w-full  ml-4 bg-gray-700 p-2 rounded-b-xl">
-                                <div class="username   text-white">
-                                    <span class="block font-bold">Hashir Meraj</span>
 
-                                    <span class=" message-text break-words ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque quos atque officia ad necessitatibus. Excepturi ex natus quasi vel officiis.</span>
-                                </div>
-                                <div class="time">5:30</div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- sending message -->
-
-                    <div class="message-area flex w-full justify-end">
-                        <div class="users flex w-2/5 mb-4">
-                            <div class="users-img">
-                                <img class="w-[60px] h-[50px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="">
-                            </div>
-                            <div class="details flex justify-between w-full ml-4 bg-gray-700 p-2 rounded-b-xl">
-                                <div class="username text-white">
-                                    <span class="block font-bold">Me</span>
-                                    <span class="message-text break-words">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore dolores officiis exercitationem nesciunt non pariatur.</span>
-                                </div>
-                                <div class="time text-white ml-4">5:30</div>
-                            </div>
-                        </div>
-                    </div>
 
                     <!-- showing message from database -->
                     <?php
@@ -185,6 +221,9 @@ $loggedinUser = $result['name'];
                     </div>
                 </div>
                 <!-- sending end -->
+
+
+
 
 
 

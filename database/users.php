@@ -194,6 +194,45 @@ class Users
 
 
 
+    public function getUserByName($name)
+    {
+        // SQL query to get a single user matching the name
+        $sql = "SELECT u.*, c.msg, c.createdOn
+        FROM users u
+        JOIN chatrooms c ON u.id = c.userid
+        WHERE LOWER(u.name) LIKE LOWER(?) 
+        AND c.createdOn = (
+            SELECT MAX(c2.createdOn) 
+            FROM chatrooms c2 
+            WHERE c2.userid = u.id
+        )
+        ORDER BY c.createdOn DESC
+        "; // 
+
+        // Prepare the statement
+        $stmt = $this->dbConn->prepare($sql);
+
+        // Modify the search term for the LIKE query
+        $searchTerm = "%{$name}%";
+
+        // Bind the search term (string type)
+        $stmt->bind_param("s", $searchTerm);
+
+        // Execute the query
+        $stmt->execute();
+
+        // Get the result
+        $result = $stmt->get_result();
+
+        return $result;
+
+        // Close the statement
+        $stmt->close();
+
+        return $user; // Return user data as an associative array
+    }
+
+
 
     public function updateLoginStatus()
     {
@@ -202,6 +241,23 @@ class Users
         $stmt = $this->dbConn->prepare($sql);
 
         $stmt->bind_param('isi', $this->loginStatus, $this->lastLogin, $this->id);
+
+        // Execute the query
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function updatelogoutStatus()
+    {
+        $sql = "UPDATE `users` SET `login_status`= 0,`last_login`=  WHERE `id` = ?";
+
+        $stmt = $this->dbConn->prepare($sql);
+
+        $stmt->bind_param('i',  $this->id);
 
         // Execute the query
         if ($stmt->execute()) {
