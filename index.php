@@ -30,8 +30,8 @@ $loggedinUser = $result['name'];
                     <div class="profile ml-9"><img class="w-[60px] h-[60px]  rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
                     <div class="name  ml-9 text-xl"> <?php echo $loggedinUser ?></div>
                 </div>
-                <div class="user-section w-full   flex items-center ">
-                    <input class=" w-4/5 p-2 rounded-4xl " type="search" placeholder="Search Name...">
+                <div class="user-section w-full   flex items-center  pl-11 mt-6">
+                    <input class="  w-4/5 p-2 rounded-full " type="search" placeholder="Search Name...">
                 </div>
 
                 <div class="flex flex-col w-4/5  p-2 scrollable-content h-full" id="userDisplay">
