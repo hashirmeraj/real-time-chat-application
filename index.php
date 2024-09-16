@@ -35,8 +35,13 @@ if (isset($_POST['searchName'])) {
 }
 
 if (isset($_POST['leaveChat'])) {
+    $objUser = new \Users();
     $objUser->updateLoginStatus();
     session_destroy();
+    if ($objUser) {
+        header("Location:./login.php");
+        exit();
+    }
 }
 
 ?>

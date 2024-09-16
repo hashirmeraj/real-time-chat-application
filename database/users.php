@@ -253,11 +253,11 @@ class Users
 
     public function updatelogoutStatus()
     {
-        $sql = "UPDATE `users` SET `login_status`= 0,`last_login`=  WHERE `id` = ?";
+        $sql = "UPDATE `users` SET `login_status`= 0,`last_login`= ? WHERE `id` = ?";
 
         $stmt = $this->dbConn->prepare($sql);
 
-        $stmt->bind_param('i',  $this->id);
+        $stmt->bind_param('si', $this->lastLogin, $this->id);
 
         // Execute the query
         if ($stmt->execute()) {
