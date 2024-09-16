@@ -33,14 +33,16 @@ if (isset($_POST['searchName'])) {
         unset($_SESSION['searchResult']); // Clear the search result if no user is found
     }
 }
-
 if (isset($_POST['leaveChat'])) {
-    $objUser = new \Users();
-    $objUser->updateLoginStatus();
-    session_destroy();
-    if ($objUser) {
-        header("Location:./login.php");
+    $objUser = new Users();
+    $lastLogin = date('Y-m-d H:i:s'); // Current timestamp
+
+    if ($objUser->updateLogoutStatus($loggedinId, $lastLogin)) {
+        session_destroy();
+        header("Location: ./login.php");
         exit();
+    } else {
+        echo 'Failed to update login status.';
     }
 }
 

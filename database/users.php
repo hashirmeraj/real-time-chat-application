@@ -251,19 +251,31 @@ class Users
     }
 
 
-    public function updatelogoutStatus()
+    public function updateLogoutStatus($loggedinId, $lastLogin)
     {
-        $sql = "UPDATE `users` SET `login_status`= 0,`last_login`= ? WHERE `id` = ?";
+        // SQL query to update the user's login status
+        $sql = "UPDATE `users` SET `login_status`= ?, `last_login`= ? WHERE `id` = ?";
 
+        // Prepare the statement
         $stmt = $this->dbConn->prepare($sql);
 
-        $stmt->bind_param('si', $this->lastLogin, $this->id);
+        if ($stmt === false) {
+            die('Prepare failed: ' . htmlspecialchars($this->dbConn->error));
+        }
+
+        // Bind the parameters
+        $stmt->bind_param('isi', $loginStatus, $lastLogin, $loggedinId);
+
+        // Set the login status
+        $loginStatus = 0; // 0 for logged out
 
         // Execute the query
-        if ($stmt->execute()) {
-            return true;
-        } else {
-            return false;
-        }
+        $success = $stmt->execute();
+
+        // Close the statement
+        $stmt->close();
+
+        // Return the result
+        return $success;
     }
 }
