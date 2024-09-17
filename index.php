@@ -203,9 +203,9 @@ if (isset($_POST['leaveChat'])) {
                 <div class="details flex justify-between w-full ml-4 bg-gray-700 p-2 rounded-b-xl">
                     <div class="username text-white">
                         <span class="block text-gray-300 font-bold text-sm md:text-sm  ">' . $fromName . '</span>
-                        <span class="message-text break-words">' . $chatroom['msg'] . '</span>
+                        <span class="message-text break-words ">' . $chatroom['msg'] . '</span>
                     </div>
-                    <div class="time text-gray-400">' . $time . '</div>
+                    <div class="time text-gray-400 text-sm md:text-sm">' . $time . '</div>
                 </div>
             </div>
                     </div>
@@ -219,7 +219,7 @@ if (isset($_POST['leaveChat'])) {
 
                     <div class="typing-area ">
                         <form id="chat-room-form" action="" method="post">
-                            <div class="form-controll  lg:w-[70%] w-4/5 flex    fixed bottom-5  bg-slate-900 ">
+                            <div class="form-controll  lg:w-[70%] w-11/12 flex    fixed bottom-5  bg-slate-900 ">
                                 <input type="hidden" id="userId" name="userId" value="<?php echo $loggedinId ?>">
                                 <input id="message" name="message" class="  rounded-lg  p-1 pl-5 w-11/12 focus:outline-none" type="text" placeholder="Type a message" maxlength="1000" required>
                                 <button id="send" type="submit" class=" h-10 w-10 rounded-full text-gray-400 focus:text-white "><i class="fa-solid fa-paper-plane  text-2xl"></i></button>

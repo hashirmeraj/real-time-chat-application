@@ -2,7 +2,11 @@
 module.exports = {
   content: ["*"],
   theme: {
-    extend: {},
+    extend: {
+      minWidth: {
+        '14': '3.5rem', // Equivalent to 56px
+      },
+    },
   },
   plugins: [],
 }

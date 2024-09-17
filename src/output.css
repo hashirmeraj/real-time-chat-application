@@ -733,6 +733,10 @@ video {
   width: 80%;
 }
 
+.w-9 {
+  width: 2.25rem;
+}
+
 .w-\[25\.9\%\] {
   width: 25.9%;
 }
@@ -759,6 +763,11 @@ video {
 
 .w-screen {
   width: 100vw;
+}
+
+.max-w-max {
+  max-width: -moz-max-content;
+  max-width: max-content;
 }
 
 .max-w-xs {
@@ -905,6 +914,11 @@ video {
 
 .bg-transparent {
   background-color: transparent;
+}
+
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .p-1 {
@@ -1142,19 +1156,6 @@ video {
   .md\:px-10 {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
-  }
-
-  .md\:text-\[20px\] {
-    font-size: 20px;
-  }
-
-  .md\:text-\[10px\] {
-    font-size: 10px;
-  }
-
-  .md\:text-lg {
-    font-size: 1.125rem;
-    line-height: 1.75rem;
   }
 
   .md\:text-sm {
