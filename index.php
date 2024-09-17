@@ -157,7 +157,7 @@ if (isset($_POST['leaveChat'])) {
                                     <span class="block font-bold">' . htmlspecialchars($users['name']) . '</span>
                                     <span>' . htmlspecialchars($msg) . '</span>
                                 </div>
-                                <div class="time text-gray-500">' . htmlspecialchars($time) . '</div>
+                                <div class="time text-gray-500 text-sm">' . htmlspecialchars($time) . '</div>
                             </div>
                         </div>';
                         }
@@ -196,7 +196,7 @@ if (isset($_POST['leaveChat'])) {
                         // Showing message
                         echo '
                     <div class="message-area flex w-full ' . $justify . '">
-            <div class="users flex  sm:w-4/5 md:w-2/5  mb-4">
+            <div class="users flex  sm:w-4/5 md:w-3/6  mb-4">
                 <div class="users-img">
                     <img class="w-[40px] h-[35px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="">
                 </div>
@@ -205,7 +205,7 @@ if (isset($_POST['leaveChat'])) {
                         <span class="block text-gray-300 font-bold text-sm md:text-sm  ">' . $fromName . '</span>
                         <span class="message-text break-words ">' . $chatroom['msg'] . '</span>
                     </div>
-                    <div class="time text-gray-400 text-sm md:text-sm">' . $time . '</div>
+                    <div class="time text-gray-400 text-sm md:text-sm ">' . $time . '</div>
                 </div>
             </div>
                     </div>

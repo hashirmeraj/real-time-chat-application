@@ -18,16 +18,16 @@ $(document).ready(function () {
 
             var html_data = `
             <div class="message-area flex w-full justify-end">
-            <div class="users flex w-2/5 mb-4">
+            <div class="users flex sm:w-4/5 md:w-3/6 mb-4">
                 <div class="users-img">
                     <img class="w-[40px] h-[35px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="">
                 </div>
                 <div class="details flex justify-between w-full ml-4 bg-gray-700 p-2 rounded-b-xl">
                     <div class="username text-white">
-                        <span class="block font-bold">`+ data.from + `</span>
+                        <span class="block text-gray-300 font-bold text-sm md:text-sm">`+ data.from + `</span>
                         <span class="message-text break-words">`+ data.msg + `</span>
                     </div>
-                    <div class="time">`+ data.dt + `</div>
+                    <div class="time text-gray-400 text-sm md:text-sm">`+ data.dt + `</div>
                 </div>
             </div>
         </div>
@@ -36,21 +36,21 @@ $(document).ready(function () {
         } else {
 
             var html_data = `
-                < div class="message-area flex w-full justify-start" >
-                    <div class="users flex w-2/5 mb-4">
-                        <div class="users-img">
-                            <img class="w-[40px] h-[35px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="">
-                        </div>
-                        <div class="details flex justify-between w-full ml-4 bg-gray-700 p-2 rounded-b-xl">
-                            <div class="username text-white">
-                                <span class="block font-bold">`+ data.from + `</span>
-                                <span class="message-text break-words">`+ data.msg + `</span>
-                            </div>
-                            <div class="time text-gray-400">`+ data.dt + `</div>
-                        </div>
+            <div class="message-area flex w-full justify-start">
+                <div class="users flex sm:w-4/5 md:w-3/6 mb-4">
+                    <div class="users-img">
+                        <img class="w-[40px] h-[35px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="">
                     </div>
-        </div >
-                `;
+                    <div class="details flex justify-between w-full ml-4 bg-gray-700 p-2 rounded-b-xl">
+                        <div class="username text-white">
+                            <span class="block font-boldtext-gray-300 font-bold text-sm md:text-sm">` + data.from + `</span>
+                            <span class="message-text break-words">` + data.msg + `</span>
+                        </div>
+                        <div class="time text-gray-400 text-sm md:text-sm ">` + data.dt + `</div>
+                    </div>
+                </div>
+            </div>
+        `;
 
 
         }
@@ -59,6 +59,11 @@ $(document).ready(function () {
 
 
         $('#chat_message').val('');  // Clear the message input after sending
+        function scrollToBottom() {
+            const chatArea = document.getElementById('chatArea');
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+        scrollToBottom();
 
     };
 
@@ -121,3 +126,14 @@ $(document).ready(function () {
 //         alert("Please enter a message before sending.");
 //     }
 // });
+
+
+function scrollToBottom() {
+    const chatArea = document.getElementById('chatArea');
+    chatArea.scrollTop = chatArea.scrollHeight;
+}
+
+// Call the function when the page loads
+window.onload = function () {
+    scrollToBottom();
+};
