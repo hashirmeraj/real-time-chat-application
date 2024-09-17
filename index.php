@@ -59,14 +59,14 @@ if (isset($_POST['leaveChat'])) {
     <title>Chat Room</title>
 </head>
 
-<body>
-    <div class="main flex w-screen h-screen bg-slate-500 justify-between ">
-        <aside class="left h-screen w-[25.9%] text-white ">
+<body class=" sm:text-xs">
+    <div class="main flex w-screen h-screen bg-slate-500 justify-between">
+        <aside class="left h-screen w-[25.9%] text-white hidden  lg:block">
             <div class="h-full w-full  bg-gray-900 rounded-r-2xl flex flex-col items-center pt-10 ">
                 <div class="user-section w-full   flex items-center justify-around">
                     <div class="profile ml-9"><img class="w-[60px] h-[60px]  rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="" srcset=""></div>
-                    <div class="name  text-xl"> <?php echo $loggedinUser ?></div>
-                    <div class="name  ml-9 text-xl">
+                    <div class="name text-xl"> <?php echo $loggedinUser ?></div>
+                    <div class="name   text-xl">
 
                         <form method="post">
                             <button type="submit" name="leaveChat" class=" text-sm h-auto w-auto p-1 border-2 focus:bg-red-500 text-gray-500 border-gray-600 rounded-lg hover:bg-slate-800 hover:text-white hover:border-white ">Leave Chat</button>
@@ -168,7 +168,7 @@ if (isset($_POST['leaveChat'])) {
                 </div>
             </div>
         </aside>
-        <div class="right w-[74%] h-full bg-slate-900 rounded-l-2xl">
+        <div class="right lg:w-[74%] w-full h-full bg-slate-900 rounded-l-2xl">
             <div class="chatarea w-full h-full p-8 ">
                 <div class="display-chat w-full h-[93%]   flex flex-col  scrollable-content pr-2" id="chatArea">
 
@@ -219,7 +219,7 @@ if (isset($_POST['leaveChat'])) {
 
                     <div class="typing-area ">
                         <form id="chat-room-form" action="" method="post">
-                            <div class="form-controll  w-[70%] flex    fixed bottom-5  bg-slate-900 ">
+                            <div class="form-controll  lg:w-[70%] w-full flex    fixed bottom-5  bg-slate-900 ">
                                 <input type="hidden" id="userId" name="userId" value="<?php echo $loggedinId ?>">
                                 <input id="message" name="message" class="  rounded-lg  p-1 pl-5 w-11/12 focus:outline-none" type="text" placeholder="Type a message" maxlength="1000" required>
                                 <button id="send" type="submit" class=" h-10 w-10 rounded-full text-gray-400 focus:text-white "><i class="fa-solid fa-paper-plane  text-2xl"></i></button>
