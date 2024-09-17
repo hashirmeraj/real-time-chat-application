@@ -46,7 +46,7 @@ $(document).ready(function () {
                                 <span class="block font-bold">`+ data.from + `</span>
                                 <span class="message-text break-words">`+ data.msg + `</span>
                             </div>
-                            <div class="time">`+ data.dt + `</div>
+                            <div class="time text-gray-400">`+ data.dt + `</div>
                         </div>
                     </div>
         </div >

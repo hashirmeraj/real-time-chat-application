@@ -157,7 +157,7 @@ if (isset($_POST['leaveChat'])) {
                                     <span class="block font-bold">' . htmlspecialchars($users['name']) . '</span>
                                     <span>' . htmlspecialchars($msg) . '</span>
                                 </div>
-                                <div class="time">' . htmlspecialchars($time) . '</div>
+                                <div class="time text-gray-500">' . htmlspecialchars($time) . '</div>
                             </div>
                         </div>';
                         }
@@ -168,7 +168,7 @@ if (isset($_POST['leaveChat'])) {
                 </div>
             </div>
         </aside>
-        <div class="right lg:w-[74%] w-full h-full bg-slate-900 rounded-l-2xl s">
+        <div class="right lg:w-[74%] w-full h-full bg-slate-900 rounded-l-2xl ">
             <div class="chatarea w-full h-full p-8 ">
                 <div class="display-chat w-full h-[93%]   flex flex-col  scrollable-content pr-2" id="chatArea">
 
@@ -196,16 +196,16 @@ if (isset($_POST['leaveChat'])) {
                         // Showing message
                         echo '
                     <div class="message-area flex w-full ' . $justify . '">
-            <div class="users flex w-2/5 mb-4">
+            <div class="users flex  sm:w-4/5 md:w-2/5  mb-4">
                 <div class="users-img">
                     <img class="w-[40px] h-[35px] rounded-full" src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" alt="">
                 </div>
                 <div class="details flex justify-between w-full ml-4 bg-gray-700 p-2 rounded-b-xl">
                     <div class="username text-white">
-                        <span class="block font-bold ">' . $fromName . '</span>
+                        <span class="block text-gray-300 font-bold text-sm md:text-sm  ">' . $fromName . '</span>
                         <span class="message-text break-words">' . $chatroom['msg'] . '</span>
                     </div>
-                    <div class="time">' . $time . '</div>
+                    <div class="time text-gray-400">' . $time . '</div>
                 </div>
             </div>
                     </div>
@@ -219,7 +219,7 @@ if (isset($_POST['leaveChat'])) {
 
                     <div class="typing-area ">
                         <form id="chat-room-form" action="" method="post">
-                            <div class="form-controll  lg:w-[70%] w-full flex    fixed bottom-5  bg-slate-900 ">
+                            <div class="form-controll  lg:w-[70%] w-4/5 flex    fixed bottom-5  bg-slate-900 ">
                                 <input type="hidden" id="userId" name="userId" value="<?php echo $loggedinId ?>">
                                 <input id="message" name="message" class="  rounded-lg  p-1 pl-5 w-11/12 focus:outline-none" type="text" placeholder="Type a message" maxlength="1000" required>
                                 <button id="send" type="submit" class=" h-10 w-10 rounded-full text-gray-400 focus:text-white "><i class="fa-solid fa-paper-plane  text-2xl"></i></button>
