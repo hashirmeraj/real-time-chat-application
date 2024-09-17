@@ -59,7 +59,7 @@ if (isset($_POST['leaveChat'])) {
     <title>Chat Room</title>
 </head>
 
-<body class=" sm:text-xs">
+<body>
     <div class="main flex w-screen h-screen bg-slate-500 justify-between">
         <aside class="left h-screen w-[25.9%] text-white hidden  lg:block">
             <div class="h-full w-full  bg-gray-900 rounded-r-2xl flex flex-col items-center pt-10 ">
@@ -168,7 +168,7 @@ if (isset($_POST['leaveChat'])) {
                 </div>
             </div>
         </aside>
-        <div class="right lg:w-[74%] w-full h-full bg-slate-900 rounded-l-2xl">
+        <div class="right lg:w-[74%] w-full h-full bg-slate-900 rounded-l-2xl s">
             <div class="chatarea w-full h-full p-8 ">
                 <div class="display-chat w-full h-[93%]   flex flex-col  scrollable-content pr-2" id="chatArea">
 
@@ -202,7 +202,7 @@ if (isset($_POST['leaveChat'])) {
                 </div>
                 <div class="details flex justify-between w-full ml-4 bg-gray-700 p-2 rounded-b-xl">
                     <div class="username text-white">
-                        <span class="block font-bold">' . $fromName . '</span>
+                        <span class="block font-bold ">' . $fromName . '</span>
                         <span class="message-text break-words">' . $chatroom['msg'] . '</span>
                     </div>
                     <div class="time">' . $time . '</div>
