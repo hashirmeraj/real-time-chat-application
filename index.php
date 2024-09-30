@@ -56,7 +56,7 @@ if (isset($_POST['leaveChat'])) {
     <link href="./src/output.css" rel="stylesheet">
     <link rel="stylesheet" href="./src/output.css">
     <script src="https://kit.fontawesome.com/b01bd35356.js" crossorigin="anonymous"></script>
-    <title>Chat Room</title>
+    <title>Chat Rooms</title>
 </head>
 
 <body>

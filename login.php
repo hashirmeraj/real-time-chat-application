@@ -95,6 +95,8 @@ if (isset($_POST['join'])) {
                         <h1 class="font-bold text-3xl text-gray-900">Join Chat room</h1>
                         <p>Enter your information for joining</p>
                     </div>
+
+                    
                     <div>
                         <form action="" method="post">
                             <div class="flex -mx-3">
