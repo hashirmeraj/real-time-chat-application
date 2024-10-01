@@ -3,7 +3,7 @@ date_default_timezone_set('Asia/Karachi'); // Change to your desired time zone
 
 class DbConnect
 {
-    private $servername = 'localhost:3307'; // Server name, including port if not the default (3306)
+    private $servername = 'localhost'; // Server name, including port if not the default (3306)
     private $username = 'root'; // MySQL username
     private $password = ''; // MySQL password (empty if not set)
     private $dbname = 'chat_application'; // Name of the database to connect to
